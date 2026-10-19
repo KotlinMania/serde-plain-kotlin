@@ -7,18 +7,19 @@ let package = Package(
         .macOS(.v15),
     ],
     dependencies: [
-        .package(name: "Template", path: "../build/SPMPackage/macosArm64/Debug")
+        .package(name: "SerdePlain", path: "../build/SPMPackage/macosArm64/Debug")
     ],
     targets: [
         .testTarget(
             name: "SwiftTestHarnessTests",
             dependencies: [
-                .product(name: "TemplateLibrary", package: "Template")
+                .product(name: "SerdePlainLibrary", package: "SerdePlain")
             ],
             linkerSettings: [
                 .unsafeFlags([
                     "-L", "../build/swift-test",
-                    "-lTemplate",
+                    "-L", "../build/MergedLibraries/macos/Debug",
+                    "-lSerdePlain",
                 ]),
             ]
         ),
